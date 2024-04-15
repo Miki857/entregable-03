@@ -49,9 +49,8 @@ const autoComplete = (cities, type) => {
         }
     }
 
-    inputBox.onfocusout = () => {
-        //TAREA:
-        //Cada que el input pierda el "focus". Se deve ocultar el <ul>.
+    ul.onmouseleave = (event) => {
+        console.log(event)
         ul.style.display = "none";
     }
 

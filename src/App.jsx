@@ -10,6 +10,13 @@ import autoCompleteChar from './js/autoCompleteChar.js';
 import Header from './components/Header.jsx';
 
 function App() {
+  //LOADING SCREEN:
+  //"citiesLoaded" y "charactersLoaded" seran utilizados para HABILITAR la carga del del 'main'.
+  //"canAutocomplete" sera ultilizado para HABILITAR los 2 useEffect que estan justo debajo. Ya que sino los .js van a intentar acceder a elementos del DOM cuando aun no existen.
+  const [citiesLoaded, setCitiesLoaded] = useState(false);
+  const [charactersLoaded, setCharactersLoaded] = useState(false);
+  const [canAutocomplete, setCanAutocomplete] = useState(false);
+  
   const [locationNumber, setLocationNumber] = useState(3);//ID del Lugar.
   const url = `https://rickandmortyapi.com/api/location/${locationNumber}`;//URL del lugar
   const [apiData, getApiData] = useFetch(url);//Custom Fetch.
@@ -115,24 +122,24 @@ function App() {
   }, [characterNumber]);//Cada vez que el usuario busque un universo se debe volver a pedir la api.
   
   //LOADING SCREEN:
-  //"citiesLoaded" y "charactersLoaded" seran utilizados para HABILITAR la carga del del 'main'.
-  //"canAutocomplete" sera ultilizado para HABILITAR los 2 useEffect que estan justo debajo. Ya que sino los .js van a intentar acceder a elementos del DOM cuando aun no existen.
-  const [citiesLoaded, setCitiesLoaded] = useState(false);
-  const [charactersLoaded, setCharactersLoaded] = useState(false);
-  const [canAutocomplete, setCanAutocomplete] = useState(false);
-
   useEffect(() => {
-    if(canAutocomplete){autoComplete(cities, "city");}//Charge autocomplete JS for places.
+    if(canAutocomplete){//Charge autocomplete JS for places.
+      autoComplete(cities, "city");
+    }
   },[cities, canAutocomplete])
 
   useEffect(() => {
-    if(canAutocomplete){autoCompleteChar(characters, "char");}//Charge autocomplete JS for character.
+    if(canAutocomplete){//Charge autocomplete JS for character.
+      autoCompleteChar(characters, "char");
+    }
   },[characters, canAutocomplete])
 
-
-  if(document.querySelector(".characterData") && !canAutocomplete){//La segunda condicion es para que no se ejecute infinitamente. RE-RENDERER ERROR.
-    setCanAutocomplete(true);
+  if(citiesLoaded && charactersLoaded){
+    if(!canAutocomplete){//La segunda condicion es para que no se ejecute infinitamente. RE-RENDERER ERROR.
+      setCanAutocomplete(true);
+    }
   }
+  
 
   return (
     <>
