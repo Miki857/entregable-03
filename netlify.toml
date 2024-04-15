@@ -1,4 +1,4 @@
 [[redirects]]
 from = "/*"
-to = "index.html"
+to = "episodes.html"
 status = 200
