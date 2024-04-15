@@ -1,0 +1,445 @@
+/*-- RESET--*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-width: 0;
+}
+
+body{
+    margin: 0;
+    min-height: 100dvh;
+}
+
+h1, h2, h3, h4{
+    margin: 0;
+    text-wrap: balance;
+}
+
+p{
+    text-wrap: pretty;
+    margin: 0;
+}
+/* --------------------------------- */
+
+:root{
+    --color-place-title: #26dd00;
+    --font-very-thin: 300;
+    --font-thin: 500;
+    --font-medium: 700;
+    --font-bold: 900;
+}
+
+html{
+    background-color: #003732;
+    font-family: "Rubik", sans-serif;
+}
+
+#root{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto 1fr;
+}
+
+.header{
+    background-image: url("https://www.whatspaper.com/wp-content/uploads/2021/09/rick-and-morty-wallpaper-whatspaper-3.jpg");
+    background-position: center;
+    background-size: cover;
+
+    width: 100vw;
+    height: 30vh;
+
+    nav{
+        position: absolute;
+        top: 0;
+        padding: 1rem 0;
+        backdrop-filter: blur(5px);
+        width: 100%;
+
+        z-index: 1;
+
+        justify-content: space-evenly;
+
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    }
+
+    img{
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+main{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+
+    /* GIFTS */
+    .gif__left{
+        left: 0;
+    }
+    .gif__right{
+        right: 0;
+    }
+
+    .gif__left, .gif__right{
+        position: absolute;
+        z-index: 1;
+        width: 23rem;
+        visibility: hidden;
+    }
+
+    /* INPUTS */
+    input{
+        border: none;
+        border-radius: 0.4rem 0 0 0.4rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .search-btn{
+        border-radius: 0 0.4rem 0.4rem 0;
+        padding: 0 1rem;
+    }
+
+    input:focus-visible{
+        outline: none;
+    }
+
+    label{
+        color: white;
+        font-size: 0.75rem;
+    }
+
+    form{
+        width: min-content;
+    }
+
+    /* REMOVE INPUT ARROWS CHROME SAFARI...*/
+    input::-webkit-outer-spin-button,     input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* REMOVE INPUT ARROWS FIREFOX */
+    input[type=number]{
+        -moz-appearance: textfield;
+    }
+
+    .placeData__container{
+        padding: 0.5rem;
+        background-color: #106c46a3;
+        border: solid 2px #38ec5496;
+        border-radius: 0.5rem;
+        width: 90%;
+    }
+
+    .placeData{
+        width: 90%;
+
+        background-color: #00555e;
+        box-shadow: 4px 4px 5px rgba(0,0,0,0.7);
+
+        border-radius: 1rem;
+        border: solid 2px #006a75;
+
+        padding: 1rem;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        gap: 1rem;
+
+        div{
+            grid-column: 1/2;
+            grid-row: 2/3;
+            width: fit-content;
+        }
+
+        th, td{
+            padding: 0.2rem;
+        }
+
+        th{
+            color: rgba(255, 255, 255, 1);
+            text-align: left;
+        }
+
+        td{
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: var(--font-very-thin);
+            text-align: right;
+        }
+
+        caption{
+            color: var(--color-place-title);
+            text-transform: uppercase;
+            font-weight: var(--font-medium);
+        }
+    }
+
+    .characterData{
+        background-color: #00555e;
+        box-shadow: 4px 4px 5px rgba(0,0,0,0.7);
+
+        border-radius: 1rem;
+        border: solid 2px #006a75;
+
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+
+        th, td{
+            padding: 0.2rem;
+        }
+
+        th{
+            color: rgba(255, 255, 255, 1);
+            text-align: left;
+        }
+
+        td{
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: var(--font-very-thin);
+            text-align: right;
+        }
+
+        caption{
+            color: var(--color-place-title);
+            text-transform: uppercase;
+            font-weight: var(--font-medium);
+        }
+
+        /*GRID ORDER*/
+        div{
+            grid-column: 1/3;
+        }
+    }
+
+    .residents__container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    /* APP EPISODES */
+    .episode__container{
+        width: 90%;
+        padding: 1rem;
+        background-color: #106c46a3;
+        border: solid 2px #38ec5496;
+        margin-bottom: 1rem;
+
+        h2{
+            color: var(--color-place-title);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        p{
+            text-align: center;
+            color: white;
+            font-weight: var(--font-medium);
+            line-height: 28px;
+
+            span{
+                font-weight: var(--font-very-thin);
+            }
+        }
+
+        h3{
+            margin: 1rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .characters_container{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+
+            img{
+                border-radius: 50%;
+            }
+
+            p{
+                font-weight: var(--font-very-thin);
+                line-height: 15px;
+            }
+        }
+    }
+}
+
+.search_ul{
+    padding: 0;
+
+    width: 100%;
+    max-height: 200px;
+
+    overflow: auto;
+    position: absolute;
+    z-index: 1;
+
+    background-color: rgb(24, 119, 101);
+    color: white;
+
+    transform: translateY(3rem);
+
+    border-radius: 1rem;
+    border: solid 2px white;
+}
+
+.search_ul li{
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.search_ul li:hover{
+    background-color: aqua;
+}
+
+.loadingContainer{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i{
+        color: white;
+    }
+}
+
+/* RESPONSIVE */
+@media screen and (min-width: 800px){
+    .placeData{
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr 1fr !important;
+
+        table{
+            grid-column: 2/3 !important;
+            grid-row: 1/3 !important;
+        }
+    }
+    .residents__container{
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch !important;
+    }
+
+    .gif__left, .gif__right{
+        visibility: visible !important;
+    }
+
+    .gif__left{
+        margin-left: -5% !important;
+    }
+    
+    .gif__right{
+        margin-right: 0 !important;
+    }
+
+    .characters_container{
+        grid-template-columns: repeat(5, 1fr) !important;
+    }
+}
+
+@media screen and (min-width: 1000px){
+    .header{
+        background-image: url("https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2015/07/rick-morty.jpg");
+
+        height: 40vh;
+    }
+
+    .characters_container{
+        grid-template-columns: repeat(10, 1fr) !important;
+    }
+
+    .gif__left{
+        margin-left: 4% !important;
+    }
+    
+    .gif__right{
+        margin-right: 4% !important;
+    }
+
+    .placeData{
+        max-width: 40rem;
+    }
+}
+
+/* ATRIBUTES */
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.gap-01{
+    gap: 1rem
+}
+
+.gap-01_75{
+    gap: 1.75rem
+}
+
+.gap-02{
+    gap: 2rem
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.align-center{
+    align-items: center;
+}
+.flex-start{
+    justify-content: flex-start;
+}
+
+.hidden{
+    display: none;
+}
+
+.search-btn{
+    background-color: green;
+    border: none;
+    color: white;
+}
+
+.search-btn:hover, .search-btn:focus{
+    outline: solid 1px;
+}
+
+.page-btn{
+    background-color: #007480;
+    border: none;
+    color: white;
+}
+
+.page-btn:hover, .page-btn:focus{
+    outline: solid 1px; 
+}
