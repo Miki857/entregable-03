@@ -10,6 +10,9 @@ import autoCompleteChar from './js/autoCompleteChar.js';
 import Header from './components/Header.jsx';
 
 function App() {
+  //ERROR:
+  const [error, setError] = useState("");
+
   //LOADING SCREEN:
   //"citiesLoaded" y "charactersLoaded" seran utilizados para HABILITAR la carga del del 'main'.
   //"canAutocomplete" sera ultilizado para HABILITAR los 2 useEffect que estan justo debajo. Ya que sino los .js van a intentar acceder a elementos del DOM cuando aun no existen.
@@ -17,6 +20,7 @@ function App() {
   const [charactersLoaded, setCharactersLoaded] = useState(false);
   const [canAutocomplete, setCanAutocomplete] = useState(false);
   
+  //LUGAR-UNIVERSO:
   const [locationNumber, setLocationNumber] = useState(3);//ID del Lugar.
   const url = `https://rickandmortyapi.com/api/location/${locationNumber}`;//URL del lugar
   const [apiData, getApiData] = useFetch(url);//Custom Fetch.
@@ -93,7 +97,9 @@ function App() {
       }
     }
 
-    if(!foundPlace){alert("Lugar no encontrado.")}
+    if(!foundPlace){
+      errorPopUp("Place not Found");
+    }
   }
 
   //SEARCH-FIELD CHARACTER-NAME:
@@ -114,7 +120,8 @@ function App() {
       }
     }
 
-    if(!foundCharacter){alert("Personaje no encontrado.")}
+    if(!foundCharacter){
+      errorPopUp("Character not Found");}
   }
 
   useEffect(() => {//Ejecuto la api al ingresar a la pagina.
@@ -139,6 +146,23 @@ function App() {
       setCanAutocomplete(true);
     }
   }
+
+  //FUNTIONS:
+  function errorPopUp(text){
+    const popError = document.querySelector(".error__popup");
+    const popErrorText = document.querySelector(".error__popup__text");
+    popErrorText.innerHTML = text;
+    popError.classList.remove("hidden");
+
+    setTimeout(() => {
+      popError.classList.add("animate");
+    }, 2000);
+
+    setTimeout(() => {
+      popError.classList.add("hidden");
+      popError.classList.remove("animate");
+    }, 4000);
+  }
   
 
   return (
@@ -149,8 +173,10 @@ function App() {
         (citiesLoaded && charactersLoaded) ?
           <>
             {/* CHARACTER DATA */}
+            {/* GIFS */}
             <img className='gif__left' src="https://movementstrategy.com/wp-content/themes/bigdrop-theme/mortyawardy/the-gist-of-it.gif" alt="gif-01"/>
             <img className='gif__right' src="https://i.giphy.com/McIBYFNF5pkayHj6vl.webp" alt="gif-02"/>
+            
             <section className='characterData gap-01'>
               {/*SEARCH-FIELD CHARACTER-NAME:  */}
               <div className='search-box search-box_char flex flex-column align-center'>
@@ -250,6 +276,9 @@ function App() {
           </>
       }
     </main>
+    <div className='error__popup hidden'>
+      <p className='error__popup__text'></p>
+    </div>
     </>
   )
 }
